@@ -13,11 +13,11 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
-temperature = ctrl.Antecedent(np.arange(50, 0, 10), 'temperature')
-humidity = ctrl.Antecedent(np.arange(100, 0, 20), 'humidity')
+temperature = ctrl.Antecedent(np.arange(0, 50, 10), 'temperature')
+humidity = ctrl.Antecedent(np.arange(0, 100, 20), 'humidity')
 atmospheric_pressure = ctrl.Antecedent(np.arange(870, 1089, 73), 'atmospheric_pressure')
 
-alcohol_solution = ctrl.Consequent(np.arange(100, 10, 10), 'alcohol_solution')
+alcohol_solution = ctrl.Consequent(np.arange(00, 100, 10), 'alcohol_solution')
 
 alcohol_solution['10%'] = fuzz.trimf(alcohol_solution.universe, [90, 100, 100])
 alcohol_solution['20%'] = fuzz.trimf(alcohol_solution.universe, [80, 90, 100])
@@ -40,7 +40,7 @@ alcohol_solution['50%'].view()
     # freezing
     # extremely-cold
     # very-cold
-    # cold
+    # cold 15
     # fairly-cold
 
 
@@ -65,38 +65,38 @@ rule6 = ctrl.Rule(temperature['freezing'] | humidity['humid'] | atmospheric_pres
 rule7 = ctrl.Rule(temperature['freezing'] | humidity['comfortable'] | atmospheric_pressure['low'], alcohol_solution['100%'])
 rule8 = ctrl.Rule(temperature['freezing'] | humidity['comfortable'] | atmospheric_pressure['medium'], alcohol_solution['100%'])
 rule9 = ctrl.Rule(temperature['freezing'] | humidity['comfortable'] | atmospheric_pressure['high'], alcohol_solution['100%'])
-rule10 =ctrl.Rule(temperature['freezing'] | humidity['refreshing'] | atmospheric_pressure['low'], alcohol_solution['100%'])
-rule11 =ctrl.Rule(temperature['freezing'] | humidity['refreshing'] | atmospheric_pressure['medium'], alcohol_solution['100%'])
-rule12 =ctrl.Rule(temperature['freezing'] | humidity['refreshing'] | atmospheric_pressure['high'], alcohol_solution['100%'])
-rule13 =ctrl.Rule(temperature['freezing'] | humidity['dry'] | atmospheric_pressure['low'], alcohol_solution['100%'])
-rule14 =ctrl.Rule(temperature['freezing'] | humidity['dry'] | atmospheric_pressure['medium'], alcohol_solution['100%'])
-rule15 =ctrl.Rule(temperature['freezing'] | humidity['dry'] | atmospheric_pressure['high'], alcohol_solution['100%'])
+rule10 = ctrl.Rule(temperature['freezing'] | humidity['refreshing'] | atmospheric_pressure['low'], alcohol_solution['100%'])
+rule11 = ctrl.Rule(temperature['freezing'] | humidity['refreshing'] | atmospheric_pressure['medium'], alcohol_solution['100%'])
+rule12 = ctrl.Rule(temperature['freezing'] | humidity['refreshing'] | atmospheric_pressure['high'], alcohol_solution['100%'])
+rule13 = ctrl.Rule(temperature['freezing'] | humidity['dry'] | atmospheric_pressure['low'], alcohol_solution['100%'])
+rule14 = ctrl.Rule(temperature['freezing'] | humidity['dry'] | atmospheric_pressure['medium'], alcohol_solution['100%'])
+rule15 = ctrl.Rule(temperature['freezing'] | humidity['dry'] | atmospheric_pressure['high'], alcohol_solution['100%'])
 
-rule16= ctrl.Rule(temperature['extremely-cold'] | humidity['sticky'] | atmospheric_pressure['low'], alcohol_solution['80%'])
-rule17= ctrl.Rule(temperature['extremely-cold'] | humidity['sticky'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
-rule18= ctrl.Rule(temperature['extremely-cold'] | humidity['sticky'] | atmospheric_pressure['high'], alcohol_solution['80%'])
-rule19= ctrl.Rule(temperature['extremely-cold'] | humidity['humid'] | atmospheric_pressure['low'], alcohol_solution['80%'])
-rule20= ctrl.Rule(temperature['extremely-cold'] | humidity['humid'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
-rule21= ctrl.Rule(temperature['extremely-cold'] | humidity['humid'] | atmospheric_pressure['high'], alcohol_solution['80%'])
-rule22= ctrl.Rule(temperature['extremely-cold'] | humidity['comfortable'] | atmospheric_pressure['low'], alcohol_solution['80%'])
-rule23= ctrl.Rule(temperature['extremely-cold'] | humidity['comfortable'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
-rule24= ctrl.Rule(temperature['extremely-cold'] | humidity['comfortable'] | atmospheric_pressure['high'], alcohol_solution['80%'])
-rule25 =ctrl.Rule(temperature['extremely-cold'] | humidity['refreshing'] | atmospheric_pressure['low'], alcohol_solution['80%'])
-rule26 =ctrl.Rule(temperature['extremely-cold'] | humidity['refreshing'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
-rule27 =ctrl.Rule(temperature['extremely-cold'] | humidity['refreshing'] | atmospheric_pressure['high'], alcohol_solution['80%'])
-rule28 =ctrl.Rule(temperature['extremely-cold'] | humidity['dry'] | atmospheric_pressure['low'], alcohol_solution['80%'])
-rule29 =ctrl.Rule(temperature['extremely-cold'] | humidity['dry'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
-rule30 =ctrl.Rule(temperature['extremely-cold'] | humidity['dry'] | atmospheric_pressure['high'], alcohol_solution['80%'])
+rule16 = ctrl.Rule(temperature['extremely-cold'] | humidity['sticky'] | atmospheric_pressure['low'], alcohol_solution['80%'])
+rule17 = ctrl.Rule(temperature['extremely-cold'] | humidity['sticky'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
+rule18 = ctrl.Rule(temperature['extremely-cold'] | humidity['sticky'] | atmospheric_pressure['high'], alcohol_solution['80%'])
+rule19 = ctrl.Rule(temperature['extremely-cold'] | humidity['humid'] | atmospheric_pressure['low'], alcohol_solution['80%'])
+rule20 = ctrl.Rule(temperature['extremely-cold'] | humidity['humid'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
+rule21 = ctrl.Rule(temperature['extremely-cold'] | humidity['humid'] | atmospheric_pressure['high'], alcohol_solution['80%'])
+rule22 = ctrl.Rule(temperature['extremely-cold'] | humidity['comfortable'] | atmospheric_pressure['low'], alcohol_solution['80%'])
+rule23 = ctrl.Rule(temperature['extremely-cold'] | humidity['comfortable'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
+rule24 = ctrl.Rule(temperature['extremely-cold'] | humidity['comfortable'] | atmospheric_pressure['high'], alcohol_solution['80%'])
+rule25 = ctrl.Rule(temperature['extremely-cold'] | humidity['refreshing'] | atmospheric_pressure['low'], alcohol_solution['80%'])
+rule26 = ctrl.Rule(temperature['extremely-cold'] | humidity['refreshing'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
+rule27 = ctrl.Rule(temperature['extremely-cold'] | humidity['refreshing'] | atmospheric_pressure['high'], alcohol_solution['80%'])
+rule28 = ctrl.Rule(temperature['extremely-cold'] | humidity['dry'] | atmospheric_pressure['low'], alcohol_solution['80%'])
+rule29 = ctrl.Rule(temperature['extremely-cold'] | humidity['dry'] | atmospheric_pressure['medium'], alcohol_solution['80%'])
+rule30 = ctrl.Rule(temperature['extremely-cold'] | humidity['dry'] | atmospheric_pressure['high'], alcohol_solution['80%'])
 
-rule31= ctrl.Rule(temperature['very-cold'] | humidity['sticky'] | atmospheric_pressure['low'], alcohol_solution['60%'])
-rule32= ctrl.Rule(temperature['very-cold'] | humidity['sticky'] | atmospheric_pressure['medium'], alcohol_solution['60%'])
-rule33= ctrl.Rule(temperature['very-cold'] | humidity['sticky'] | atmospheric_pressure['high'], alcohol_solution['60%'])
-rule34= ctrl.Rule(temperature['very-cold'] | humidity['humid'] | atmospheric_pressure['low'], alcohol_solution['60%'])
-rule35= ctrl.Rule(temperature['very-cold'] | humidity['humid'] | atmospheric_pressure['medium'], alcohol_solution['60%'])
-rule36= ctrl.Rule(temperature['very-cold'] | humidity['humid'] | atmospheric_pressure['high'], alcohol_solution['60%'])
-rule37= ctrl.Rule(temperature['very-cold'] | humidity['comfortable'] | atmospheric_pressure['low'], alcohol_solution['60%'])
-rule38= ctrl.Rule(temperature['very-cold'] | humidity['comfortable'] | atmospheric_pressure['medium'], alcohol_solution['60%'])
-rule39= ctrl.Rule(temperature['very-cold'] | humidity['comfortable'] | atmospheric_pressure['high'], alcohol_solution['60%'])
+rule31 = ctrl.Rule(temperature['very-cold'] | humidity['sticky'] | atmospheric_pressure['low'], alcohol_solution['60%'])
+rule32 = ctrl.Rule(temperature['very-cold'] | humidity['sticky'] | atmospheric_pressure['medium'], alcohol_solution['60%'])
+rule33 = ctrl.Rule(temperature['very-cold'] | humidity['sticky'] | atmospheric_pressure['high'], alcohol_solution['60%'])
+rule34 = ctrl.Rule(temperature['very-cold'] | humidity['humid'] | atmospheric_pressure['low'], alcohol_solution['60%'])
+rule35 = ctrl.Rule(temperature['very-cold'] | humidity['humid'] | atmospheric_pressure['medium'], alcohol_solution['60%'])
+rule36 = ctrl.Rule(temperature['very-cold'] | humidity['humid'] | atmospheric_pressure['high'], alcohol_solution['60%'])
+rule37 = ctrl.Rule(temperature['very-cold'] | humidity['comfortable'] | atmospheric_pressure['low'], alcohol_solution['60%'])
+rule38 = ctrl.Rule(temperature['very-cold'] | humidity['comfortable'] | atmospheric_pressure['medium'], alcohol_solution['60%'])
+rule39 = ctrl.Rule(temperature['very-cold'] | humidity['comfortable'] | atmospheric_pressure['high'], alcohol_solution['60%'])
 rule40 = ctrl.Rule(temperature['very-cold'] | humidity['refreshing'] | atmospheric_pressure['low'], alcohol_solution['60%'])
 rule41 = ctrl.Rule(temperature['very-cold'] | humidity['refreshing'] | atmospheric_pressure['medium'], alcohol_solution['60%'])
 rule42 = ctrl.Rule(temperature['very-cold'] | humidity['refreshing'] | atmospheric_pressure['high'], alcohol_solution['60%'])
@@ -135,6 +135,32 @@ rule72 = ctrl.Rule(temperature['fairly-cold'] | humidity['refreshing'] | atmosph
 rule73 = ctrl.Rule(temperature['fairly-cold'] | humidity['dry'] | atmospheric_pressure['low'], alcohol_solution['20%'])
 rule74 = ctrl.Rule(temperature['fairly-cold'] | humidity['dry'] | atmospheric_pressure['medium'], alcohol_solution['20%'])
 rule75 = ctrl.Rule(temperature['fairly-cold'] | humidity['dry'] | atmospheric_pressure['high'], alcohol_solution['20%'])
+
+tipping_ctrl = ctrl.ControlSystem([
+    rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10,
+    rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
+    rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30,
+    rule31, rule32, rule33, rule34, rule35, rule36, rule37, rule38, rule39, rule40,
+    rule41, rule42, rule43, rule44, rule45, rule46, rule47, rule48, rule49, rule50,
+    rule51, rule52, rule53, rule54, rule55, rule56, rule57, rule58, rule59, rule60,
+    rule61, rule62, rule63, rule64, rule65, rule66, rule67, rule68, rule69, rule70,
+    rule71, rule72, rule73, rule74, rule75
+])
+
+roztworowanie = ctrl.ControlSystemSimulation(tipping_ctrl)
+
+
+roztworowanie.input['temperature'] = 15
+roztworowanie.input['humidity'] = 80
+roztworowanie.input['atmospheric_pressure'] = 900
+
+# Crunch the numbers
+roztworowanie.compute()
+
+print (roztworowanie.output['alcohol_solution'])
+alcohol_solution.view(sim=roztworowanie)
+
+plt.show()
 
 
 """
