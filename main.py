@@ -16,8 +16,11 @@ from skfuzzy import control as ctrl
 temperature = ctrl.Antecedent(np.arange(0, 50, 10), 'temperature')
 humidity = ctrl.Antecedent(np.arange(0, 100, 20), 'humidity')
 atmospheric_pressure = ctrl.Antecedent(np.arange(870, 1089, 73), 'atmospheric_pressure')
-
 alcohol_solution = ctrl.Consequent(np.arange(00, 100, 10), 'alcohol_solution')
+
+temperature.automf(5)
+humidity.automf(5)
+atmospheric_pressure.automf(3)
 
 alcohol_solution['10%'] = fuzz.trimf(alcohol_solution.universe, [90, 100, 100])
 alcohol_solution['20%'] = fuzz.trimf(alcohol_solution.universe, [80, 90, 100])
@@ -33,8 +36,6 @@ alcohol_solution['100%'] = fuzz.trimf(alcohol_solution.universe, [10, 10, 20])
 temperature.view()
 humidity.view()
 atmospheric_pressure.view()
-
-alcohol_solution['50%'].view()
 
 # temp:
     # freezing
@@ -136,7 +137,7 @@ rule73 = ctrl.Rule(temperature['fairly-cold'] | humidity['dry'] | atmospheric_pr
 rule74 = ctrl.Rule(temperature['fairly-cold'] | humidity['dry'] | atmospheric_pressure['medium'], alcohol_solution['20%'])
 rule75 = ctrl.Rule(temperature['fairly-cold'] | humidity['dry'] | atmospheric_pressure['high'], alcohol_solution['20%'])
 
-tipping_ctrl = ctrl.ControlSystem([
+solution_ctrl = ctrl.ControlSystem([
     rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10,
     rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
     rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30,
@@ -147,18 +148,18 @@ tipping_ctrl = ctrl.ControlSystem([
     rule71, rule72, rule73, rule74, rule75
 ])
 
-roztworowanie = ctrl.ControlSystemSimulation(tipping_ctrl)
+solution = ctrl.ControlSystemSimulation(solution_ctrl)
 
 
-roztworowanie.input['temperature'] = 15
-roztworowanie.input['humidity'] = 80
-roztworowanie.input['atmospheric_pressure'] = 900
+solution.input['temperature'] = 15
+solution.input['humidity'] = 80
+solution.input['atmospheric_pressure'] = 900
 
 # Crunch the numbers
-roztworowanie.compute()
+solution.compute()
 
-print (roztworowanie.output['alcohol_solution'])
-alcohol_solution.view(sim=roztworowanie)
+print(solution.output['alcohol_solution'])
+alcohol_solution.view(sim=solution)
 
 plt.show()
 
