@@ -38,10 +38,10 @@ alcohol_solution['50%'].view()
 
 # temp:
     # freezing
-    # extremely - cold
-    # very - cold
+    # extremely-cold
+    # very-cold
     # cold
-    # fairly - cold
+    # fairly-cold
 
 
 # humidity:
