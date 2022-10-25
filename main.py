@@ -132,9 +132,9 @@ solution_ctrl = ctrl.ControlSystem([
 solution = ctrl.ControlSystemSimulation(solution_ctrl)
 
 
-solution.input['temperature'] = 15
-solution.input['humidity'] = 80
-solution.input['atmospheric_pressure'] = 900
+solution.input['temperature'] = 45
+solution.input['humidity'] = 70
+solution.input['atmospheric_pressure'] = 1010
 
 # Crunch the numbers
 solution.compute()
