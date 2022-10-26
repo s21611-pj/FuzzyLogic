@@ -14,19 +14,19 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
-arsenic = ctrl.Antecedent(np.arange( , ,), 'arsenic')
-cadmium = ctrl.Antecedent(np.arange( , ,), 'cadmium')
-benzopyrene = ctrl.Antecedent(np.arange( , ,), 'benzopyrene')
-air_quality = ctrl.Consequent(np.arange(0, 10, 1), 'air_quality')
+arsenic = ctrl.Antecedent(np.arange(0, 11, 1), 'arsenic')
+cadmium = ctrl.Antecedent(np.arange(0, 11, 1), 'cadmium')
+benzopyrene = ctrl.Antecedent(np.arange(0, 11, 1), 'benzopyrene')
+air_quality = ctrl.Consequent(np.arange(0, 101, 1), 'air_quality')
 
-arsenic.automf(5)
-cadmium.automf(5)
-benzopyrene.automf(3)
+arsenic.automf(3, variable_type='quantity')
+cadmium.automf(3, variable_type='quantity')
+benzopyrene.automf(3, variable_type='quantity')
 
 
 air_quality['low'] = fuzz.trimf(air_quality.universe, [0, 0, 30])
-air_quality['medium'] = fuzz.trimf(air_quality.universe, [0, 30, 70])
-air_quality['high'] = fuzz.trimf(air_quality.universe, [30, 70, 100])
+air_quality['average'] = fuzz.trimf(air_quality.universe, [15, 45, 70])
+air_quality['high'] = fuzz.trimf(air_quality.universe, [60, 100, 100])
 
 
 arsenic.view()
@@ -34,40 +34,48 @@ cadmium.view()
 benzopyrene.view()
 
 
-rule1 = ctrl.Rule(arsenic['good'] | cadmium['good'] | benzopyrene['average'], air_quality['low'])
-rule2 = ctrl.Rule(arsenic['good'] | cadmium['good'] | benzopyrene['average'], air_quality['100%'])
-rule3 = ctrl.Rule(arsenic['good'] | cadmium['good'] | benzopyrene['good'], air_quality['100%'])
-rule4 = ctrl.Rule(arsenic['good'] | cadmium['decent'] | benzopyrene['poor'], air_quality['100%'])
-rule5 = ctrl.Rule(arsenic['good'] | cadmium['decent'] | benzopyrene['average'], air_quality['100%'])
-rule6 = ctrl.Rule(arsenic['good'] | cadmium['decent'] | benzopyrene['good'], air_quality['100%'])
-rule7 = ctrl.Rule(arsenic['good'] | cadmium['average'] | benzopyrene['poor'], air_quality['100%'])
-rule8 = ctrl.Rule(arsenic['good'] | cadmium['average'] | benzopyrene['average'], air_quality['100%'])
-rule9 = ctrl.Rule(arsenic['good'] | cadmium['average'] | benzopyrene['good'], air_quality['100%'])
-rule10 = ctrl.Rule(arsenic['good'] | cadmium['mediocre'] | benzopyrene['poor'], air_quality['100%'])
-rule11 = ctrl.Rule(arsenic['good'] | cadmium['mediocre'] | benzopyrene['average'], air_quality['100%'])
-rule12 = ctrl.Rule(arsenic['good'] | cadmium['mediocre'] | benzopyrene['good'], air_quality['100%'])
-rule13 = ctrl.Rule(arsenic['good'] | cadmium['poor'] | benzopyrene['poor'], air_quality['100%'])
-rule14 = ctrl.Rule(arsenic['good'] | cadmium['poor'] | benzopyrene['average'], air_quality['100%'])
-rule15 = ctrl.Rule(arsenic['good'] | cadmium['poor'] | benzopyrene['good'], air_quality['100%'])
+rule1 = ctrl.Rule(arsenic['high'] | cadmium['high'] | benzopyrene['high'], air_quality['low'])
+rule2 = ctrl.Rule(arsenic['high'] | cadmium['high'] | benzopyrene['average'], air_quality['low'])
+rule3 = ctrl.Rule(arsenic['high'] | cadmium['high'] | benzopyrene['low'], air_quality['low'])
 
-rule16 = ctrl.Rule(arsenic['decent'] | cadmium['good'] | benzopyrene['poor'], air_quality['80%'])
-rule17 = ctrl.Rule(arsenic['decent'] | cadmium['good'] | benzopyrene['average'], air_quality['80%'])
-rule18 = ctrl.Rule(arsenic['decent'] | cadmium['good'] | benzopyrene['good'], air_quality['80%'])
-rule19 = ctrl.Rule(arsenic['decent'] | cadmium['decent'] | benzopyrene['poor'], air_quality['80%'])
-rule20 = ctrl.Rule(arsenic['decent'] | cadmium['decent'] | benzopyrene['average'], air_quality['80%'])
-rule21 = ctrl.Rule(arsenic['decent'] | cadmium['decent'] | benzopyrene['good'], air_quality['80%'])
-rule22 = ctrl.Rule(arsenic['decent'] | cadmium['average'] | benzopyrene['poor'], air_quality['80%'])
-rule23 = ctrl.Rule(arsenic['decent'] | cadmium['average'] | benzopyrene['average'], air_quality['80%'])
-rule24 = ctrl.Rule(arsenic['decent'] | cadmium['average'] | benzopyrene['good'], air_quality['80%'])
-rule25 = ctrl.Rule(arsenic['decent'] | cadmium['mediocre'] | benzopyrene['poor'], air_quality['80%'])
-rule26 = ctrl.Rule(arsenic['decent'] | cadmium['mediocre'] | benzopyrene['average'], air_quality['80%'])
-rule27 = ctrl.Rule(arsenic['decent'] | cadmium['mediocre'] | benzopyrene['good'], air_quality['80%'])
+rule4 = ctrl.Rule(arsenic['high'] | cadmium['average'] | benzopyrene['high'], air_quality['low'])
+rule5 = ctrl.Rule(arsenic['high'] | cadmium['average'] | benzopyrene['average'], air_quality['low'])
+rule6 = ctrl.Rule(arsenic['high'] | cadmium['average'] | benzopyrene['low'], air_quality['average'])
+
+rule7 = ctrl.Rule(arsenic['high'] | cadmium['low'] | benzopyrene['high'], air_quality['low'])
+rule8 = ctrl.Rule(arsenic['high'] | cadmium['low'] | benzopyrene['average'], air_quality['average'])
+rule9 = ctrl.Rule(arsenic['high'] | cadmium['low'] | benzopyrene['low'], air_quality['low'])
+
+rule10 = ctrl.Rule(arsenic['average'] | cadmium['high'] | benzopyrene['high'], air_quality['low'])
+rule11 = ctrl.Rule(arsenic['average'] | cadmium['high'] | benzopyrene['average'], air_quality['average'])
+rule12 = ctrl.Rule(arsenic['average'] | cadmium['high'] | benzopyrene['low'], air_quality['average'])
+
+rule13 = ctrl.Rule(arsenic['average'] | cadmium['average'] | benzopyrene['high'], air_quality['low'])
+rule14 = ctrl.Rule(arsenic['average'] | cadmium['average'] | benzopyrene['average'], air_quality['average'])
+rule15 = ctrl.Rule(arsenic['average'] | cadmium['average'] | benzopyrene['low'], air_quality['low'])
+
+rule16 = ctrl.Rule(arsenic['average'] | cadmium['low'] | benzopyrene['high'], air_quality['average'])
+rule17 = ctrl.Rule(arsenic['average'] | cadmium['low'] | benzopyrene['average'], air_quality['average'])
+rule18 = ctrl.Rule(arsenic['average'] | cadmium['low'] | benzopyrene['low'], air_quality['high'])
+
+rule19 = ctrl.Rule(arsenic['low'] | cadmium['high'] | benzopyrene['high'], air_quality['low'])
+rule20 = ctrl.Rule(arsenic['low'] | cadmium['high'] | benzopyrene['average'], air_quality['average'])
+rule21 = ctrl.Rule(arsenic['low'] | cadmium['high'] | benzopyrene['low'], air_quality['high'])
+
+rule22 = ctrl.Rule(arsenic['low'] | cadmium['average'] | benzopyrene['high'], air_quality['average'])
+rule23 = ctrl.Rule(arsenic['low'] | cadmium['average'] | benzopyrene['average'], air_quality['high'])
+rule24 = ctrl.Rule(arsenic['low'] | cadmium['average'] | benzopyrene['low'], air_quality['high'])
+
+rule25 = ctrl.Rule(arsenic['low'] | cadmium['low'] | benzopyrene['high'], air_quality['high'])
+rule26 = ctrl.Rule(arsenic['low'] | cadmium['low'] | benzopyrene['average'], air_quality['high'])
+rule27 = ctrl.Rule(arsenic['low'] | cadmium['low'] | benzopyrene['low'], air_quality['high'])
 
 
 solution_ctrl = ctrl.ControlSystem([
-    rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10,
-    rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
-    rule21, rule22, rule23, rule24, rule25, rule26, rule27
+    # rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10,
+    # rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
+    # rule21, rule22, rule23, rule24, rule25, rule26,
+    rule1, rule14, rule27
 ])
 
 solution = ctrl.ControlSystemSimulation(solution_ctrl)
@@ -75,7 +83,7 @@ solution = ctrl.ControlSystemSimulation(solution_ctrl)
 
 solution.input['arsenic'] = 0
 solution.input['cadmium'] = 0
-solution.input['benzopyrene'] = 0
+solution.input['benzopyrene'] = 10
 
 # Crunch the numbers
 solution.compute()
