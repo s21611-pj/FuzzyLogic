@@ -1,13 +1,15 @@
 """
+==========================================
+AirQuality Systems: The breathing problem
+==========================================
 Authors: Paweł Badysiak (s21166), Wojciech Turek (s21611)
 How to run:
 Install:
-1. todo
-2. todo
+1. pip install scikit-fuzzy
+2. pip install matplotlib
 After instalation:
-    todo
+  -> in console open folder with main.py and run command "python main.py" to run the script
 """
-
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -78,19 +80,37 @@ solution_ctrl = ctrl.ControlSystem([
     rule1, rule14, rule27
 ])
 
-solution = ctrl.ControlSystemSimulation(solution_ctrl)
+# solution = ctrl.ControlSystemSimulation(solution_ctrl)
+#
+#
+# solution.input['arsenic'] = 0
+# solution.input['cadmium'] = 0
+# solution.input['benzopyrene'] = 10
+#
+# # Crunch the numbers
+# solution.compute()
+#
+# print(solution.output['air_quality'])
+# air_quality.view(sim=solution)
+#
+# plt.show()
 
 
-solution.input['arsenic'] = 0
-solution.input['cadmium'] = 0
-solution.input['benzopyrene'] = 10
+if __name__ == '__main__':
+    solution = ctrl.ControlSystemSimulation(solution_ctrl)
 
-# Crunch the numbers
-solution.compute()
+    val1 = input("Arsenic (from 1 to 10): ")
+    val2 = input("Cadmium (from 1 to 10): ")
+    val3 = input("Benzopyrene (from 1 to 10): ")
 
-print(solution.output['air_quality'])
-air_quality.view(sim=solution)
+    solution.input['arsenic'] = int(val1)
+    solution.input['cadmium'] = int(val2)
+    solution.input['benzopyrene'] = int(val3)
 
-plt.show()
+    # Crunch the numbers
+    solution.compute()
 
+    print(solution.output['air_quality'])
+    air_quality.view(sim=solution)
 
+    plt.show()
