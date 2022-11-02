@@ -1,7 +1,10 @@
 """
 ==========================================
-AirQuality Systems: The breathing problem
+AirQuality System: The breathing problem
 ==========================================
+Problem solved:
+    Population need to get know if air condition is not harmful for their health.
+    Our AirQuality System allows to do that in simple way.
 Authors: Paweł Badysiak (s21166), Wojciech Turek (s21611)
 How to run:
 Install:
